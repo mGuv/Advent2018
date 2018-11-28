@@ -3,6 +3,7 @@
 
 # Artifacts
 /build
+/dist
 
 # Stop Apple user's polluting
 .DS_Store
