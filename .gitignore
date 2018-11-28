@@ -1,0 +1,11 @@
+# Dependencies
+/node_modules
+
+# Artifacts
+/build
+
+# Stop Apple user's polluting
+.DS_Store
+
+# IDEs
+/.idea/

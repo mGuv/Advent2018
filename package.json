@@ -1,0 +1,14 @@
+{
+    "name": "@mguv/advent-2018",
+    "version": "0.0.1",
+    "license": "MIT",
+    "author": {
+        "name": "mGuv",
+        "email": "mguv.dev@gmail.com"
+    },
+    "homepage": "https://github.com/mGuv/Advent2018#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mGuv/Advent2018.git"
+    }
+}
