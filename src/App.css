@@ -1,0 +1,23 @@
+.App {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.nav-menu {
+    grid-column: span 1;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.nav-menu__item:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
+.nav-menu__item--selected {
+    background-color: beige;
+}
+
+.content {
+    grid-column: span 11;
+}
