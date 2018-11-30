@@ -21,7 +21,7 @@ class App extends React.Component<{}, IState> {
         {title: "Day 5 - ???", component: NotImplemented},
         {title: "Day 6 - ???", component: NotImplemented},
         {title: "Day 7 - ???", component: NotImplemented},
-        {title: "Day 8- ???", component: NotImplemented},
+        {title: "Day 8 - ???", component: NotImplemented},
         {title: "Day 9 - ???", component: NotImplemented},
         {title: "Day 10 - ???", component: NotImplemented},
         {title: "Day 11 - ???", component: NotImplemented},
