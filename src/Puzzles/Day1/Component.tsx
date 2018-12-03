@@ -29,16 +29,26 @@ class Component extends React.Component<{}, IState> {
         return (
             <React.Fragment>
                 <div>This puzzle takes a series of numbers and deals with summing them up in order.</div>
-                <div>Difficulty: 1/10</div>
-                <div>The solution requires some basic string parsing, arithmetic and looping to solve</div>
-                <div><input onChange={this.updateInput}/>
-                    <button onClick={this.submit}>Solve</button>
-                </div>
+                <div>The input is in the form of a string of various integers marked by their sign, positive or negative</div>
+                <div>E.g. "+3 -5 +2 -7"</div>
+                <div>Part 1</div>
+                <div>Difficulty: 0/10</div>
+                <div>The answer to this part is super easy and requires summing all the numbers</div>
                 {this.state.submitted === true &&
                 <div>
                     <p>Part A Answer: {this.state.answer1}</p>
+                </div>
+                }
+                <div>Part 2</div>
+                <div>Difficulty: 1/10</div>
+                <div>The answer to this part requires the same logic as before, only this time the calculation can keep repeating until a duplication is detected. This requires tracking the cumulative total so far, including the initial 0. The easiest way to do this is with a Dictionary lookup.</div>
+                {this.state.submitted === true &&
+                <div>
                     <p>Part B Answer: {this.state.answer2}</p>
                 </div> }
+                <div><input onChange={this.updateInput}/>
+                    <button onClick={this.submit}>Solve</button>
+                </div>
             </React.Fragment>
 
 
