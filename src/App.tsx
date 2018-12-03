@@ -7,6 +7,8 @@ import './App.css';
 import Home from './Home';
 import {default as Day1} from './Puzzles/Day1/Component';
 import {default as Day2} from './Puzzles/Day2/Component';
+import {default as Day3} from './Puzzles/Day3/Component';
+
 
 interface IState {
     currentNode: React.ComponentType<{}>
@@ -18,7 +20,7 @@ class App extends React.Component<{}, IState> {
         {title: "Home", component: Home},
         {title: "Day 1 - Chronal Calibration", component: Day1},
         {title: "Day 2 - Inventory Management System", component: Day2},
-        {title: "Day 3 - ???", component: NotImplemented},
+        {title: "Day 3 - ???", component: Day3},
         {title: "Day 4 - ???", component: NotImplemented},
         {title: "Day 5 - ???", component: NotImplemented},
         {title: "Day 6 - ???", component: NotImplemented},
