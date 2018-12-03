@@ -1,9 +1,10 @@
-class Claim {
-    public xMin: number;
-    public xMax: number;
-    public yMin: number;
-    public yMax: number;
-    public id: string;
-public overlaps:boolean = false};
+class Claim
+{
+    public Id: string;
+    public X: number;
+    public Width: number;
+    public Y: number;
+    public Height: number;
+}
 
 export default Claim;

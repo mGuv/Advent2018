@@ -1,27 +1,28 @@
 import Claim from '../Claim';
+import BaseSolver from '../BaseSolver';
 
-import Parser from '../Parser';
+class Solver extends BaseSolver
+{
+    public Solve(input: string): number
+    {
+        const claims:Claim[] = this.ParseInput(input);
 
-class Solver {
-    public Solve(input: string): number {
-        const claims: string[] = input.split("\n")
-        const parsed: Claim[] = [];
-        const parser: Parser = new Parser();
-
-        claims.forEach((claim: string) => {
-            parsed.push(parser.Parse(claim));
-        });
+        // Track every cell found to detect overlaps
+        let overlaps: number = 0;
         const lookup: Dictionary<number> = {};
-
-        parsed.forEach((claim:Claim) => {
-            for(let x = claim.xMin; x < claim.xMax; x++)
+        // Extract every claim to its coordinates
+        claims.forEach((claim:Claim) => {
+            for(let x = claim.X; x < claim.X + claim.Width; x++)
             {
-                for(let y = claim.yMin; y < claim.yMax; y++)
+                for(let y = claim.Y; y < claim.Y + claim.Height; y++)
                 {
-                    console.log(x, y);
+                    // Log a unique key for each coordinate, checking for matches along the way
                     const key:string = x.toString() + "," + y.toString();
                     if(lookup.hasOwnProperty(key)) {
-                        console.log("dupe", key);
+                        // Only count overlaps once
+                        if(lookup[key] == 1) {
+                            overlaps++;
+                        }
                         lookup[key] = lookup[key] + 1;
                     } else {
                         lookup[key] = 1;
@@ -29,17 +30,6 @@ class Solver {
                 }
             }
         });
-
-        let overlaps: number = 0;
-        Object.keys(lookup).forEach((key:string) => {
-
-            const count: number = lookup[key];
-            console.log(key,count);
-            if(count > 1) {
-                overlaps++;
-            }
-        });
-
 
         return overlaps;
     }

@@ -1,46 +1,39 @@
+import BaseSolver from '../BaseSolver';
 import Claim from '../Claim';
 
-import Parser from '../Parser';
+class Solver extends BaseSolver
+{
+    public Solve(input: string): string
+    {
+        // Keep track of all cells claimed and all Claim's that have not overlaped
+        const claims:Claim[] = this.ParseInput(input);
+        const lookup: Dictionary<Claim> = {};
+        const notOverlapped: Dictionary<Claim> = {};
 
-class Solver {
-    public Solve(input: string): string {
-        const claims: string[] = input.split("\n")
-        const parsed: Claim[] = [];
-        const parser: Parser = new Parser();
-
-        claims.forEach((claim: string) => {
-            parsed.push(parser.Parse(claim));
-        });
-        const lookup: Dictionary<Claim[]> = {};
-
-        parsed.forEach((claim:Claim) => {
-            for(let x = claim.xMin; x < claim.xMax; x++)
+        // Have to check ALL claims before we can safely say one does not overlap
+        claims.forEach((claim:Claim) => {
+            // New piece, assume it hasn't overlapped yet
+            notOverlapped[claim.Id] = claim;
+            for(let x = claim.X; x < claim.X + claim.Width; x++)
             {
-                for(let y = claim.yMin; y < claim.yMax; y++)
+                for(let y = claim.Y; y < claim.Y + claim.Height; y++)
                 {
-                    console.log(x, y);
+                    // Generate the key for this cell and check if the cell is already taken
                     const key:string = x.toString() + "," + y.toString();
                     if(lookup.hasOwnProperty(key)) {
-                        lookup[key].push(claim);
-                        for(const otherClaim of lookup[key]) {
-                            otherClaim.overlaps = true;
-                        }
+                        // As we have just overlapped we know the existing claim AND this claim cannot tbe the answer
+                        delete notOverlapped[lookup[key].Id];
+                        delete notOverlapped[claim.Id];
                     } else {
-                        lookup[key] = [claim]
+                        // Track this claim's location in case a future entry overlaps
+                        lookup[key] = claim;
                     }
                 }
             }
         });
 
-        for(const claim of parsed) {
-            if(!claim.overlaps) {
-                return claim.id;
-            }
-        };
-
-
-
-        return "";
+        // If we don't have a result here, something went wrong
+        return Object.keys(notOverlapped)[0];
     }
 }
 
