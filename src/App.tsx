@@ -20,7 +20,7 @@ class App extends React.Component<{}, IState> {
         {title: "Home", component: Home},
         {title: "Day 1 - Chronal Calibration", component: Day1},
         {title: "Day 2 - Inventory Management System", component: Day2},
-        {title: "Day 3 - ???", component: Day3},
+        {title: "Day 3 - No Matter How You Slice It", component: Day3},
         {title: "Day 4 - ???", component: NotImplemented},
         {title: "Day 5 - ???", component: NotImplemented},
         {title: "Day 6 - ???", component: NotImplemented},

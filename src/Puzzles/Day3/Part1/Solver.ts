@@ -1,5 +1,5 @@
-import Claim from '../Claim';
 import BaseSolver from '../BaseSolver';
+import Claim from '../Claim';
 
 class Solver extends BaseSolver
 {
@@ -20,7 +20,7 @@ class Solver extends BaseSolver
                     const key:string = x.toString() + "," + y.toString();
                     if(lookup.hasOwnProperty(key)) {
                         // Only count overlaps once
-                        if(lookup[key] == 1) {
+                        if(lookup[key] === 1) {
                             overlaps++;
                         }
                         lookup[key] = lookup[key] + 1;

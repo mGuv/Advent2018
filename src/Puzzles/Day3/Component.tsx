@@ -28,17 +28,29 @@ class Component extends React.Component<{}, IState> {
     public render(): JSX.Element {
         return (
             <React.Fragment>
-                <div>This puzzle takes a series of strings and deals with analysing them for information before calculating a checksum</div>
+                <div>This puzzle takes a series of area "Claims" and deals with positioning them in a grid to check for overlaps</div>
+                <div>Each claim has an ID, a starting X,Y coordinate and a Width x Height</div>
+                <div>E.g. "#123 @ 3,2: 5x4"</div>
+                <div>Part 1</div>
                 <div>Difficulty: 2/10</div>
-                <div>The solution requires some basic string parsing, temporary storage of data.</div>
-                <div> Part A took 24 mins, Part B took 11 minutes</div>
+                <div>To answer this part, each claim must be converted in to a usable format - then have it's area projected in to a grid</div>
+                <div>By counting the number of Claims that wish to use each Cell, we can easily spot cells that overlap by looking for 2+ claims on a single cell</div>
+                <div>If a dictionary is used here, there is no need to initialise the size of the grid itself</div>
+                {this.state.submitted === true &&
+                <div>
+                    <p>Part 1 Answer: {this.state.answer1}</p>
+                </div>
+                }
+                <div>Part 2</div>
+                <div>Difficulty: 2/10</div>
+                <div>To answer this part, you must just apply the previous solution but keep track of which IDs caused overlaps.</div>
+                <div>By marking the two offending Claims when an overlap happens, there should be a single claim at the end that had zero overlaps</div>
                 <div><textarea onChange={this.updateInput}/>
                     <button onClick={this.submit}>Solve</button>
                 </div>
                 {this.state.submitted === true &&
                 <div>
-                    <p>Part A Answer: {this.state.answer1}</p>
-                    <p>Part B Answer: {this.state.answer2}</p>
+                    <p>Part 2 Answer: {this.state.answer2}</p>
                 </div> }
             </React.Fragment>
 
