@@ -14,6 +14,7 @@ class Solver extends BaseSolver
         claims.forEach((claim:Claim) => {
             // New piece, assume it hasn't overlapped yet
             notOverlapped[claim.Id] = claim;
+            // Must check EVERY coordinate as it may overlapped multiple pieces
             for(let x = claim.X; x < claim.X + claim.Width; x++)
             {
                 for(let y = claim.Y; y < claim.Y + claim.Height; y++)
