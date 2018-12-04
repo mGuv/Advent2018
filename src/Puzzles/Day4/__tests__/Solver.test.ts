@@ -2,12 +2,12 @@ import Solver from '../Solver';
 
 interface ITestData {
     input: string;
-    expectedOutput: number;
+    expectedOutput: {partA: number, partB: number}
 }
 
 const tests: ITestData[] = [
     {
-        expectedOutput: 240,
+        expectedOutput: {partA:240, partB:4455},
         input: "[1518-11-01 00:00] Guard #10 begins shift\n" +
             "[1518-11-01 00:05] falls asleep\n" +
             "[1518-11-01 00:25] wakes up\n" +
