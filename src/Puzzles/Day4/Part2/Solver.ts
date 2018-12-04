@@ -6,6 +6,7 @@ class Solver
     public Solve(input: string): number {
 
 
+
         const inputs:string[] = input.split("\n");
         inputs.sort((a:string, b:string) => {
             const timestampA: Moment = moment(a.substr(1, 16));
@@ -67,23 +68,15 @@ class Solver
 
         Object.keys(sleepPattern).forEach((guard:string) => {
             const guardPattern: Dictionary<number> = sleepPattern[guard];
-            let guardTotal:number = 0;
-            let longestGuardMinute:string = "";
-            let longestGaurdTime:number = 0;
+
             Object.keys(guardPattern).forEach((minute:string) => {
                 const total:number = guardPattern[minute];
-                guardTotal += total;
-                if(total > longestGaurdTime) {
-                    longestGaurdTime = total;
-                    longestGuardMinute = minute;
+                if(total > longestTime) {
+                    sleepyGuard = guard;
+                    longestTime = total;
+                    longestMinute = minute;
                 }
             });
-
-            if(guardTotal > longestTime) {
-                sleepyGuard = guard;
-                longestTime = guardTotal;
-                longestMinute = longestGuardMinute;
-            }
         });
 
         return Number(sleepyGuard) * Number(longestMinute);
