@@ -5,7 +5,7 @@ class Solver extends BaseSolver
 {
     public Solve(input: string): string
     {
-        // Keep track of all cells claimed and all Claim's that have not overlaped
+        // Keep track of all cells claimed and all Claim's that have not overlapped
         const claims:Claim[] = this.ParseInput(input);
         const lookup: Dictionary<Claim> = {};
         const notOverlapped: Dictionary<Claim> = {};
