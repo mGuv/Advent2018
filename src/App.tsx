@@ -24,7 +24,7 @@ class App extends React.Component<{}, IState> {
         {title: "Day 2 - Inventory Management System", component: Day2},
         {title: "Day 3 - No Matter How You Slice It", component: Day3},
         {title: "Day 4 - Repose Record", component: Day4},
-        {title: "Day 5 - ???", component: Day5},
+        {title: "Day 5 - Alchemical Reduction", component: Day5},
         {title: "Day 6 - ???", component: NotImplemented},
         {title: "Day 7 - ???", component: NotImplemented},
         {title: "Day 8 - ???", component: NotImplemented},
