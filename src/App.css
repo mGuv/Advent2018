@@ -3,6 +3,23 @@
     grid-template-columns: repeat(12, 1fr);
 }
 
+.stats-table {
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.stats-table:nth-child(odd) {
+    background-color: aliceblue;
+}
+
+.stats-table__name {
+    grid-column: span 1;
+}
+.stats-table__time {
+    grid-column: span 1;
+}
+
 .nav-menu {
     grid-column: span 1;
     display: grid;

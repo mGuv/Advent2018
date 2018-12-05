@@ -5,6 +5,9 @@ import {NotImplemented} from './Puzzles';
 
 import './App.css';
 import Home from './Home';
+
+import Stats from './Stats/Component';
+
 import {default as Day1} from './Puzzles/Day1/Component';
 import {default as Day2} from './Puzzles/Day2/Component';
 import {default as Day3} from './Puzzles/Day3/Component';
@@ -20,6 +23,7 @@ class App extends React.Component<{}, IState> {
 
     private readonly navItems: IItem[] = [
         {title: "Home", component: Home},
+        {title: "Stats", component: Stats},
         {title: "Day 1 - Chronal Calibration", component: Day1},
         {title: "Day 2 - Inventory Management System", component: Day2},
         {title: "Day 3 - No Matter How You Slice It", component: Day3},
