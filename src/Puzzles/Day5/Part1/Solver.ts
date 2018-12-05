@@ -3,37 +3,34 @@ class Solver
 {
     public Solve(input: string): string
     {
-        let index:number = 0;
-        const parts:string[] = input.split("");
-
-        while(index < parts.length) {
-            if(parts[index] === parts[index + 1]) {
-                index += 1;
+        let i: number = 0;
+        while(i < input.length -1 ){
+            if(input[i] === input[i + 1]) {
+                i++;
                 continue;
             }
 
-
-            let remove:boolean = false;
-            if(parts[index].toUpperCase() === parts[index+1]) {
-                remove = true;
+            let shouldRemove:boolean = false;
+            if(input[i].toUpperCase() === input[i+1]) {
+                shouldRemove = true;
             }
 
-            if(parts[index].toLowerCase() === parts[index+1]) {
-                remove = true;
+            if(input[i].toLowerCase() === input[i+1]) {
+                shouldRemove = true;
             }
 
-            if(remove) {
-                parts.splice(index, 2);
-                if(index >= 1) {
-                    index -= 1;
+            if(shouldRemove) {
+                input = input.replace(input[i] + input[i + 1], "");
+                // Loop iterator will push us forwards but we actually need to go BACK a character to check so -2 if we can
+                if(i >= 1) {
+                    i--;
                 }
-            }
-            else {
-                index+=1;
+            } else {
+                i++;
             }
         }
 
-       return parts.join("").length.toString();
+       return input.length.toString();
     }
 }
 

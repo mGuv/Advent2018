@@ -15,38 +15,36 @@ class Solver
             let inputClone = input;
             inputClone = inputClone.replace(new RegExp(remove.toLowerCase(), 'g'), '');
             inputClone = inputClone.replace(new RegExp(remove.toUpperCase(), 'g'), '');
-            const parts:string[] = inputClone.split("");
-            let index:number = 0;
-            while(index < parts.length) {
-                if(parts[index] === parts[index + 1]) {
-                    index += 1;
+            let i:number = 0;
+            while(i < inputClone.length -1) {
+                if(inputClone[i] === inputClone[i + 1]) {
+                    i++;
                     continue;
                 }
 
-
-                let shouldremove:boolean = false;
-                if(parts[index].toUpperCase() === parts[index+1]) {
-                    shouldremove = true;
+                let shouldRemove:boolean = false;
+                if(inputClone[i].toUpperCase() === inputClone[i+1]) {
+                    shouldRemove = true;
                 }
 
-                if(parts[index].toLowerCase() === parts[index+1]) {
-                    shouldremove = true;
+                if(inputClone[i].toLowerCase() === inputClone[i+1]) {
+                    shouldRemove = true;
                 }
 
-                if(shouldremove) {
-                    parts.splice(index, 2);
-                    if(index >= 1) {
-                        index -= 1;
+                if(shouldRemove) {
+                    inputClone = inputClone.replace(inputClone[i] + inputClone[i + 1], "");
+                    // Loop iterator will push us forwards but we actually need to go BACK a character to check so -2 if we can
+                    if(i >= 1) {
+                        i--;
                     }
+                } else {
+                    i++;
                 }
-                else {
-                    index+=1;
-                }
-            }
-            if(lowestCount<0 || parts.length < lowestCount) {
-                lowestCount = parts.length
             }
 
+            if(inputClone.length < lowestCount || lowestCount < 0) {
+                lowestCount = inputClone.length;
+            }
         });
         return lowestCount.toString();
     }
