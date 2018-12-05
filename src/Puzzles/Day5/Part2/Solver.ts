@@ -3,6 +3,7 @@ class Solver
 {
     public Solve(input: string): string
     {
+        const start:number = new Date().getTime();
         let lowestCount: number = -1;
 
         const partsFound:Dictionary<boolean> = {};
@@ -46,6 +47,8 @@ class Solver
                 lowestCount = inputClone.length;
             }
         });
+        console.log("B took " + ((new Date().getTime() - start)/ 1000) + "s");
+
         return lowestCount.toString();
     }
 }

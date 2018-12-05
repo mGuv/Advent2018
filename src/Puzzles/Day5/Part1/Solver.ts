@@ -3,6 +3,7 @@ class Solver
 {
     public Solve(input: string): string
     {
+        const start:number = new Date().getTime();
         let i: number = 0;
         while(i < input.length -1 ){
             if(input[i] === input[i + 1]) {
@@ -30,6 +31,7 @@ class Solver
             }
         }
 
+        console.log("A took " + ((new Date().getTime() - start)/ 1000) + "s");
        return input.length.toString();
     }
 }

@@ -5,6 +5,7 @@ class Solver extends BaseSolver
 {
     public Solve(input: string): number
     {
+        const start:number = new Date().getTime();
         const claims:Claim[] = this.ParseInput(input);
 
         // Track every cell found to detect overlaps
@@ -30,6 +31,8 @@ class Solver extends BaseSolver
                 }
             }
         });
+
+        console.log("A took " + ((new Date().getTime() - start)/ 1000) + "s");
 
         return overlaps;
     }

@@ -5,6 +5,8 @@ class Solver extends BaseSolver
 {
     public Solve(input: string): string
     {
+        const start:number = new Date().getTime();
+
         // Keep track of all cells claimed and all Claim's that have not overlapped
         const claims:Claim[] = this.ParseInput(input);
         const lookup: Dictionary<Claim> = {};
@@ -32,6 +34,7 @@ class Solver extends BaseSolver
                 }
             }
         });
+        console.log("A took " + ((new Date().getTime() - start)/ 1000) + "s");
 
         // If we don't have a result here, something went wrong
         return Object.keys(notOverlapped)[0];
