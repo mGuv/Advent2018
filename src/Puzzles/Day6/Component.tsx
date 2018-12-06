@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {default as Part1Solver} from './Part1/Solver';
+// import {default as Part1Solver} from './Part1/Solver';
 import {default as Part2Solver} from './Part2/Solver';
 
 
@@ -12,7 +12,7 @@ interface IState {
 
 class Component extends React.Component<{}, IState> {
 
-    private part1Solver: Part1Solver = new Part1Solver();
+    // private part1Solver: Part1Solver = new Part1Solver();
     private part2Solver: Part2Solver = new Part2Solver();
 
     public constructor(props: {}) {
@@ -54,7 +54,7 @@ class Component extends React.Component<{}, IState> {
 
     private submit = () => {
         this.setState({
-            answer1: this.part1Solver.Solve(this.state.input),
+            // answer1: this.part1Solver.Solve(this.state.input),
             answer2: this.part2Solver.Solve(this.state.input),
             submitted: true,
         });
