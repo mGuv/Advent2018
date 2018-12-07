@@ -11,6 +11,8 @@ import {default as Day3} from './Puzzles/Day3/Component';
 import {default as Day4} from './Puzzles/Day4/Component';
 import {default as Day5} from './Puzzles/Day5/Component';
 import {default as Day6} from './Puzzles/Day6/Component';
+import {default as Day7} from './Puzzles/Day7/Component';
+
 
 
 interface IState {
@@ -27,7 +29,7 @@ class App extends React.Component<{}, IState> {
         {title: "Day 4 - Repose Record", component: Day4},
         {title: "Day 5 - Alchemical Reduction", component: Day5},
         {title: "Day 6 - ???", component: Day6},
-        {title: "Day 7 - ???", component: NotImplemented},
+        {title: "Day 7 - ???", component: Day7},
         {title: "Day 8 - ???", component: NotImplemented},
         {title: "Day 9 - ???", component: NotImplemented},
         {title: "Day 10 - ???", component: NotImplemented},
