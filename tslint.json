@@ -8,6 +8,13 @@
     ]
   },
     "rules": {
-        "no-console": false
+        "no-console": false,
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "import-sources-order": "any",
+        "grouped-imports": false,
+        "named-imports-order": "any",
+        "member-ordering": false,
+        "no-unused-variable": false
     }
 }
