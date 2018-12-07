@@ -1,3 +1,5 @@
+import { throws } from 'assert';
+
 class Dictionary<TKey, TValue>
 {
     private lookup: { [key: string]: TValue } = {};
@@ -21,6 +23,9 @@ class Dictionary<TKey, TValue>
     }
 
     public Get(key: TKey): TValue {
+        if(!this.Has(key)) {
+            throw new Error("Element with key " + JSON.stringify(key) + " does not exist");
+        }
         return this.lookup[JSON.stringify(key)];
     }
 
