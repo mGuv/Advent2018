@@ -19,6 +19,11 @@ class List<T>
         this.list.push(item);
     }
 
+    public Contains(item:T): boolean
+    {
+        return this.list.indexOf(item) >= 0;
+    }
+
     public Sort(sorter:(a:T, b:T) => number)
     {
         this.list.sort(sorter);
@@ -46,3 +51,5 @@ class List<T>
         this.list.splice(index, 0, item);
     }
 }
+
+export default List;

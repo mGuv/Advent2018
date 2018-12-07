@@ -1,120 +1,132 @@
-class Solver
-{
-    public Solve(input: string): string
-    {
-        const parts:string[] = input.split("\n");
+import Dictionary from '../../../Collections/Dictionary';
 
-        const requiredToExpand:Dictionary<string[]> = {}
-        let stack:string[] = [];
+import List from '../../../Collections/List';
 
-        parts.forEach((part:string) => {
-            const start:string = part[5];
-            const end:string = part[36];
-            // start must be done before end
-            if(!requiredToExpand.hasOwnProperty(end)) {
-                requiredToExpand[end] = [];
+import HashSet from '../../../Collections/HashSet';
+
+class Solver {
+    public Solve(input: string): string {
+        const parts: string[] = input.split("\n");
+        // Look up of Job -> Set of Required Jobs
+        const requiredToExpand: Dictionary<string, HashSet<string>> = new Dictionary<string, HashSet<string>>();
+        // Alphabetised order Jobs should be completed in
+        const ordered: List<string> = new List<string>();
+
+        // Construct input in to usable structurs
+        parts.forEach((part: string) => {
+            const start: string = part[5];
+            const end: string = part[36];
+            // start must be completed before end so add start to end's requirements
+            if (!requiredToExpand.Contains(end)) {
+                requiredToExpand.Set(end, new HashSet<string>());
+            }
+            requiredToExpand.Get(end).Add(start);
+
+            // As the initial inputs won't have an end and the final inputs won't have a start... need to add both
+            if(!ordered.Contains(start)) {
+                ordered.Insert(start);
             }
 
-            requiredToExpand[end].push(start);
-            stack.push(end);
-            stack.push(start);
+            if(!ordered.Contains(end)) {
+                ordered.Insert(end);
+            }
         });
 
-        stack.sort();
-        const done:Dictionary<boolean> = {};
+        ordered.Sort((a: string, b: string) => {
+            return a < b ? -1 : 1;
+        });
 
-        let time:number = 0;
-        const lookup:Dictionary<number> = {
-            A: 1,
-            B: 2,
-            C: 3,
-            D: 4,
-            E: 5,
-            F: 6,
-            G: 7,
-            H: 8,
-            I: 9,
-            J: 10,
-            K: 11,
-            L: 12,
-            M: 13,
-            N: 14,
-            O: 15,
-            P: 16,
-            Q: 17,
-            R: 18,
-            S: 19,
-            T: 20,
-            U: 21,
-            V: 22,
-            W: 23,
-            X: 24,
-            Y: 25,
-            Z: 26
+        // Can't remember how to cast character to number so lazy lookup
+        const letterCostLookup: Dictionary<string, number> = new Dictionary<string, number>();
+        letterCostLookup.Set("A", 61);
+        letterCostLookup.Set("B", 62);
+        letterCostLookup.Set("C", 63);
+        letterCostLookup.Set("D", 64);
+        letterCostLookup.Set("E", 65);
+        letterCostLookup.Set("F", 66);
+        letterCostLookup.Set("G", 67);
+        letterCostLookup.Set("H", 68);
+        letterCostLookup.Set("I", 69);
+        letterCostLookup.Set("J", 70);
+        letterCostLookup.Set("K", 71);
+        letterCostLookup.Set("L", 72);
+        letterCostLookup.Set("M", 73);
+        letterCostLookup.Set("N", 74);
+        letterCostLookup.Set("O", 75);
+        letterCostLookup.Set("P", 76);
+        letterCostLookup.Set("Q", 77);
+        letterCostLookup.Set("R", 78);
+        letterCostLookup.Set("S", 79);
+        letterCostLookup.Set("T", 80);
+        letterCostLookup.Set("U", 81);
+        letterCostLookup.Set("V", 82);
+        letterCostLookup.Set("W", 83);
+        letterCostLookup.Set("X", 84);
+        letterCostLookup.Set("Y", 85);
+        letterCostLookup.Set("Z", 86);
 
-        };
+        // Timestamps each worker will finish
+        const workerBusyTill: Dictionary<number, number> = new Dictionary<number, number>();
+        workerBusyTill.Set(0, -1);
+        workerBusyTill.Set(1, -1);
+        workerBusyTill.Set(2, -1);
+        workerBusyTill.Set(3, -1);
+        workerBusyTill.Set(4, -1);
 
-        const workerBusyUntil:Dictionary<number> = {
-            "0": 0,
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0
-        };
+        // What the worker is doing
+        const workerBusyOn: Dictionary<number, string> = new Dictionary<number, string>();
 
-        const workerBusyOn:Dictionary<string> = {};
-        const jobTaken:Dictionary<boolean> = {};
-        while(stack.length > 0) {
-            for(let i = 0; i <5 ;i++) {
-                if (time === workerBusyUntil[i.toString()]) {
-                    done[workerBusyOn[i.toString()]] = true;
-                    console.log("[",time,"] Worker", i, "finished", workerBusyOn[i.toString()]);
-                    stack = stack.filter((s: string) => {
-                        return s !== workerBusyOn[i.toString()];
-                    });
+        // What steps are done
+        const completedJobs: HashSet<string> = new HashSet<string>();
+
+        // Time each step until the input has run out
+        let time: number = 0;
+        const jobsTotal:number = ordered.Count;
+        while (completedJobs.Count < jobsTotal) {
+            // Clean up any finishing jobs
+            for (let workerId = 0; workerId < 5; workerId++) {
+                if (time === workerBusyTill.Get(workerId)) {
+                    completedJobs.Add(workerBusyOn.Get(workerId));
                 }
             }
-            for(let i = 0; i < 5; i++){
-                if(time < workerBusyUntil[i.toString()]) {
+            // Assign/Work jobs
+            for (let workerId = 0; workerId < 5; workerId++) {
+                // Check if worker is still busy
+                if (time < workerBusyTill.Get(workerId)) {
                     continue;
                 }
 
-                    // find a job for the worker as this can be ANY available nodes...
-                    let next: number = 0;
-                    while (next < stack.length) {
-                        let safe: boolean = true;
-                        const n: string = stack[next];
+                // find a job for the worker as this can be ANY available node still left in the stack
+                for (let i = 0; i < ordered.Count; i++) {
+                    const nextJob: string = ordered.GetAt(i);
 
-                        if(jobTaken.hasOwnProperty(n)) {
-                            next++;
-                            continue;
-                        }
-
-                        if (requiredToExpand.hasOwnProperty(n)) {
-                            requiredToExpand[n].forEach((r: string) => {
-                                if (!done.hasOwnProperty(r)) {
-                                    safe = false;
-                                }
-                            })
-                        }
-
-                        if (safe) {
-                            workerBusyOn[i.toString()] = stack[next];
-                            jobTaken[workerBusyOn[i.toString()]] = true;
-                            workerBusyUntil[i.toString()] = time + lookup[workerBusyOn[i.toString()]] + 60;
-                            console.log("[",time,"] Worker", i, "assigned job", workerBusyOn[i.toString()], "until time", workerBusyUntil[i.toString()]);
-                            break;
-                        } else {
-                            next++
-                        }
+                    // Check if all the required jobs to start this one have finished
+                    let canJobBeDone: boolean = true;
+                    if (requiredToExpand.Contains(nextJob)) {
+                        requiredToExpand.Get(nextJob).Values.forEach((r: string) => {
+                            if (!completedJobs.Contains(r)) {
+                                canJobBeDone = false;
+                            }
+                        })
                     }
 
+                    // If it can't, try the next one
+                    if (!canJobBeDone) {
+                        continue;
+                    }
 
+                    // Assign job and remove from pool
+                    ordered.RemoveAt(i);
+                    workerBusyOn.Set(workerId, nextJob);
+                    console.log("[" + time + "]", "assigned job", nextJob, "to", workerId);
+                    workerBusyTill.Set(workerId, time + letterCostLookup.Get(nextJob));
+                    break;
+                }
             }
 
             time++;
-        }
 
+        }
         return (time - 1).toString();
     }
 }

@@ -1,10 +1,8 @@
-import { throws } from 'assert';
-
 class Dictionary<TKey, TValue>
 {
     private lookup: { [key: string]: TValue } = {};
 
-    get All(): { key: TKey, value: TValue }[] {
+    get All(): Array<{ key: TKey, value: TValue }> {
         return Object.keys(this.lookup).map((key: string) => {
             return { key: JSON.parse(key), value: this.lookup[key] };
         });
@@ -23,17 +21,17 @@ class Dictionary<TKey, TValue>
     }
 
     public Get(key: TKey): TValue {
-        if(!this.Has(key)) {
+        if(!this.Contains(key)) {
             throw new Error("Element with key " + JSON.stringify(key) + " does not exist");
         }
         return this.lookup[JSON.stringify(key)];
     }
 
-    public Add(key: TKey, value: TValue) {
+    public Set(key: TKey, value: TValue) {
         this.lookup[JSON.stringify(key)] = value;
     }
 
-    public Has(key: TKey): boolean {
+    public Contains(key: TKey): boolean {
         return this.lookup.hasOwnProperty(JSON.stringify(key));
     }
 

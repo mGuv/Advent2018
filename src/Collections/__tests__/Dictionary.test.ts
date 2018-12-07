@@ -11,7 +11,7 @@ interface ITestValue {
 const testValue: ITestValue = {PropertyA: "Test One", PropertyB: {PropertyC: 123}};
 
 const set: Dictionary<ITestValue, string> = new Dictionary<ITestValue, string>();
-set.Add(testValue, "hello");
+set.Set(testValue, "hello");
 
 it("Should return keys", () => {
     expect(set.Keys).toEqual([testValue]);
