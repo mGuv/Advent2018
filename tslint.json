@@ -15,6 +15,7 @@
         "grouped-imports": false,
         "named-imports-order": "any",
         "member-ordering": false,
-        "no-unused-variable": false
+        "no-unused-variable": false,
+        "prefer-for-of": false
     }
 }

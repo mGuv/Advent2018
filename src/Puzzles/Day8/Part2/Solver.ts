@@ -1,12 +1,14 @@
-import Dictionary from '../../../Collections/Dictionary';
-
 import List from '../../../Collections/List';
+import BaseSolver from '../BaseSolver';
+import MetadataNode from '../MetadataNode';
 
-import HashSet from '../../../Collections/HashSet';
-
-class Solver {
-    public Solve(input: string): string {
-        return "no 2";
+class Solver extends BaseSolver
+{
+    public Solve(input: string): string
+    {
+        // Value was calucalted during parsing for ease so just return the root nodes value
+        let total:number = this.ParseInput(input).Value;
+        return total.toString();
     }
 }
 

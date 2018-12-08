@@ -7,14 +7,8 @@ interface ITestData {
 
 const tests: ITestData[] = [
     {
-        expectedOutput: "15",
-        input: "Step C must be finished before step A can begin.\n" +
-            "Step C must be finished before step F can begin.\n" +
-            "Step A must be finished before step B can begin.\n" +
-            "Step A must be finished before step D can begin.\n" +
-            "Step B must be finished before step E can begin.\n" +
-            "Step D must be finished before step E can begin.\n" +
-            "Step F must be finished before step E can begin.",
+        expectedOutput: "66",
+        input: "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
     },
 ];
 
