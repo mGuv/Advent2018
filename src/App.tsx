@@ -13,6 +13,8 @@ import {default as Day5} from './Puzzles/Day5/Component';
 import {default as Day6} from './Puzzles/Day6/Component';
 import {default as Day7} from './Puzzles/Day7/Component';
 import {default as Day8} from './Puzzles/Day8/Component';
+import {default as Day9} from './Puzzles/Day9/Component';
+
 
 
 
@@ -32,7 +34,7 @@ class App extends React.Component<{}, IState> {
         {title: "Day 6 - ???", component: Day6},
         {title: "Day 7 - ???", component: Day7},
         {title: "Day 8 - ???", component: Day8},
-        {title: "Day 9 - ???", component: NotImplemented},
+        {title: "Day 9 - ???", component: Day9},
         {title: "Day 10 - ???", component: NotImplemented},
         {title: "Day 11 - ???", component: NotImplemented},
         {title: "Day 12 - ???", component: NotImplemented},
