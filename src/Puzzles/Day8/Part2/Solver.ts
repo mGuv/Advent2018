@@ -7,7 +7,7 @@ class Solver extends BaseSolver
     public Solve(input: string): string
     {
         // Value was calucalted during parsing for ease so just return the root nodes value
-        let total:number = this.ParseInput(input).Value;
+        const total:number = this.ParseInput(input).Value;
         return total.toString();
     }
 }
