@@ -7,8 +7,23 @@ interface ITestData {
 
 const tests: ITestData[] = [
     {
-        expectedOutput: "32",
-        input: "413 players; last marble is worth 71082 points"
+        expectedOutput: "325",
+        input: "initial state: #..#.#..##......###...###\n" +
+            "\n" +
+            "...## => #\n" +
+            "..#.. => #\n" +
+            ".#... => #\n" +
+            ".#.#. => #\n" +
+            ".#.## => #\n" +
+            ".##.. => #\n" +
+            ".#### => #\n" +
+            "#.#.# => #\n" +
+            "#.### => #\n" +
+            "##.#. => #\n" +
+            "##.## => #\n" +
+            "###.. => #\n" +
+            "###.# => #\n" +
+            "####. => #",
     },
 ];
 
